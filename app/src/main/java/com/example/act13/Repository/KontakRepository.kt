@@ -5,6 +5,7 @@ import com.example.act13.network.KontakService
 
 interface KontakRepository {
     suspend fun getKontak(): List<Kontak>
+    suspend fun insertKontak(kontak: Kontak)
 }
 
 class NetworkKontakRepository(
@@ -13,5 +14,7 @@ class NetworkKontakRepository(
     override suspend fun getKontak(): List<Kontak> =
         kontakApiService.getKontak()
 
-
+    override suspend fun insertKontak(kontak: Kontak) {
+        kontakApiService.insertKontak(kontak)
+    }
 }
