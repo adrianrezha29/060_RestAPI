@@ -19,9 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.act11.R
+import com.example.act13.navigation.PengelolaHalaman
 import com.example.act13.ui.home.viewmodel.HomeViewModel
 import com.example.act13.ui.home.viewmodel.PenyediaViewModel
+import com.example.consumerestapi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +40,7 @@ fun KontakApp (
                 .padding(it)
         ){
 
-
+            PengelolaHalaman()
         }
     }
 }

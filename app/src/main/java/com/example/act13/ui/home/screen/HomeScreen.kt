@@ -36,13 +36,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.act11.R
 import com.example.act13.model.Kontak
 import com.example.act13.navigation.DestinasiNavigasi
 import com.example.act13.ui.TopAppBarKontak
 import com.example.act13.ui.home.viewmodel.HomeViewModel
 import com.example.act13.ui.home.viewmodel.KontakUIState
 import com.example.act13.ui.home.viewmodel.PenyediaViewModel
+import com.example.consumerestapi.R
 
 @Composable
 fun HomeStatus(
