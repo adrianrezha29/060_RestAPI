@@ -12,6 +12,9 @@ object PenyediaViewModel {
         initializer {
             HomeViewModel(aplikasiKontak().container.kontakRepository)
         }
+        initializer {
+            InsertViewModel(aplikasiKontak().container.kontakRepository)
+        }
 
     }
 }
