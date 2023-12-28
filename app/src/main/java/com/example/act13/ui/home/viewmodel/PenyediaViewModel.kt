@@ -1,0 +1,20 @@
+package com.example.act13.ui.home.viewmodel
+
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.act13.KontakAplication
+
+object PenyediaViewModel {
+    val Factory = viewModelFactory {
+
+        initializer {
+            HomeViewModel(aplikasiKontak().container.kontakRepository)
+        }
+
+    }
+}
+
+fun CreationExtras.aplikasiKontak(): KontakAplication =
+    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]as KontakAplication)
