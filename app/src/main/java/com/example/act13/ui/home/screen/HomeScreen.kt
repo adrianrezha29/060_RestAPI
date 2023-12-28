@@ -33,6 +33,55 @@ import com.example.act11.R
 import com.example.act13.model.Kontak
 import com.example.act13.ui.home.viewmodel.KontakUIState
 
+@Composable
+fun HomeStatus(
+    kontakUIState: KontakUIState,
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier,
+    onDeleteClick: (Kontak) -> Unit = {},
+    onDetailClick: (Int) -> Unit
+){
+    when (kontakUIState){
+        is KontakUIState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
+        is KontakUIState.Success -> KontakLayout(
+            kontak = kontakUIState.kontak,
+            modifier = modifier.fillMaxWidth(),
+            onDetailClick = {
+                onDetailClick(it.id)
+            },
+            onDeleteClick = {
+                onDeleteClick(it)
+            }
+        )
+        is KontakUIState.Error -> OnError(retryAction, modifier = modifier.fillMaxSize())
+    }
+}
+
+@Composable
+fun OnError(retryAction: () -> Unit, modifier: Modifier = Modifier){
+    Column (
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(painter = painterResource(id = R.drawable.ic_connection_error),
+            contentDescription = ""
+        )
+        Text(text = stringResource(id = R.string.loading_failed), modifier = Modifier.padding(16.dp))
+        Button(onClick = retryAction) {
+            Text(stringResource(id = R.string.retry))
+        }
+    }
+}
+
+@Composable
+fun OnLoading(modifier: Modifier = Modifier){
+    Image(
+        modifier = modifier.size(200.dp),
+        painter = painterResource(id = R.drawable.loading_img),
+        contentDescription = stringResource(id = R.string.loading)
+    )
+}
 
 @Composable
 fun KontakCard(
@@ -100,53 +149,4 @@ fun KontakLayout(
             )
         }
     }
-}
-@Composable
-fun HomeStatus(
-    kontakUIState: KontakUIState,
-    retryAction: () -> Unit,
-    modifier: Modifier = Modifier,
-    onDeleteClick: (Kontak) -> Unit = {},
-    onDetailClick: (Int) -> Unit
-){
-    when (kontakUIState){
-        is KontakUIState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
-        is KontakUIState.Success -> KontakLayout(
-            kontak = kontakUIState.kontak,
-            modifier = modifier.fillMaxWidth(),
-            onDetailClick = {
-                onDetailClick(it.id)
-            },
-            onDeleteClick = {
-                onDeleteClick(it)
-            }
-        )
-        is KontakUIState.Error -> OnError(retryAction, modifier = modifier.fillMaxSize())
-    }
-}
-
-@Composable
-fun OnError(retryAction: () -> Unit, modifier: Modifier = Modifier){
-    Column (
-        modifier = modifier,
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(painter = painterResource(id = R.drawable.ic_connection_error),
-            contentDescription = ""
-        )
-        Text(text = stringResource(id = R.string.loading_failed), modifier = Modifier.padding(16.dp))
-        Button(onClick = retryAction) {
-            Text(stringResource(id = R.string.retry))
-        }
-    }
-}
-
-@Composable
-fun OnLoading(modifier: Modifier = Modifier){
-    Image(
-        modifier = modifier.size(200.dp),
-        painter = painterResource(id = R.drawable.loading_img),
-        contentDescription = stringResource(id = R.string.loading)
-    )
 }
